@@ -188,7 +188,7 @@ public class EmailService : IEmailService
         await inbox.OpenAsync(FolderAccess.ReadWrite);
 
         await inbox.StoreAsync(uid, new StoreFlagsRequest(StoreAction.Add, MessageFlags.Deleted) { Silent = true });
-        await inbox.ExpungeAsync(); // Ensure it's removed from the server
+        await inbox.ExpungeAsync(); 
 
         Console.WriteLine("DeleteMessageAsync: Email deleted successfully.");
     }

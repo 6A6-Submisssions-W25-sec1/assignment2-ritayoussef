@@ -29,26 +29,27 @@
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Grid Padding="10">
-                                <!-- Tap Gesture -->
+                                <!-- Email Tap -->
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:Reference InboxPageInstance}, Path=EmailTappedCommand}"
                                                           CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="80" />
                                 </Grid.ColumnDefinitions>
                                 
                                
                                 <!-- User Icon -->
-                                <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" 
-                                       CornerRadius="20" BackgroundColor="LightGray" 
+                                <Frame Grid.Column="0" WidthRequest="60" HeightRequest="60" 
+                                       CornerRadius="30" BackgroundColor="LightGray" 
                                        VerticalOptions="Center" HorizontalOptions="Center">
                                     <Label Text="{Binding SenderInitial}" FontSize="18" FontAttributes="Bold"
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Frame>
+                                
 
 
                                 <!-- Email Details -->
@@ -69,7 +70,7 @@
             </CollectionView>
         </ScrollView>
 
-        <!-- Compose Button at the Bottom -->
+        <!-- Compose Button -->
         <Button Text="Compose" Command="{Binding ComposeCommand}"
                 HorizontalOptions="End" Margin="10"
                 VerticalOptions="End" />
