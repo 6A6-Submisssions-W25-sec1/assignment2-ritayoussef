@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MauiEmail.Views;
 
 namespace MauiEmail
 {
@@ -7,6 +8,7 @@ namespace MauiEmail
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            //builder.Services.AddTransient<InboxPage>();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>

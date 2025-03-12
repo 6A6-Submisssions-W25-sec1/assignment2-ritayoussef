@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiEmail.Views.ReadPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="10">
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="5">
+                    
+                    <!-- Subject -->
+                    <Label Text="Subject:" FontSize="14" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="{Binding Subject}" FontSize="12" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" />
+
+                    <!-- From -->
+                    <Label Text="From:" FontSize="14" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
+                    <Label Text="{Binding From.Name}" FontSize="12" Grid.Row="1" Grid.Column="1" />
+                    
+                    <!-- Recipients -->
+                    <Label Text="To:" FontSize="14" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" />
+                    <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding To}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="5" Margin="5" BackgroundColor="White" BorderColor="Purple"
+                                       CornerRadius="5" WidthRequest="70" HeightRequest="20" >
+                                    <Label Text="{Binding Address}" FontSize="12" TextColor="Purple" 
+                                           VerticalTextAlignment="Start" HorizontalTextAlignment="Start" />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- Date -->
+                    <Label Text="Date:" FontSize="14" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" />
+                    <Label Text="{Binding Date, StringFormat='{0:G}'}" FontSize="12" Grid.Row="3" Grid.Column="1" />
+                    
+                </Grid>
+
+                <!-- Email Body -->
+                <WebView HeightRequest="400">
+                    <WebView.Source>
+                        <HtmlWebViewSource Html="{Binding HtmlBody}" />
+                    </WebView.Source>
+                </WebView>
+
+                <!-- Forward Button -->
+                <Button Text="Forward" Clicked="OnForwardClicked" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

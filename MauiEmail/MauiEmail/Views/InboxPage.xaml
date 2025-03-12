@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiEmail.Views.InboxPage" x:Name="InboxPageInstance">
+        
+    <Shell.TitleView>
+        <SearchBar Placeholder="Search emails..."
+                   TextChanged="OnSearchTextChanged"
+                   HorizontalOptions="FillAndExpand" />
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <Grid>
+        <ScrollView>
+            <CollectionView ItemsSource="{Binding Emails}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete" BackgroundColor="Red"
+                                               Clicked="OnDeleteSwipe" 
+                                               CommandParameter="{Binding .}" />
+
+                                    <SwipeItem Text="Favorite" BackgroundColor="Green" 
+                                               Command="{Binding Source={x:Reference InboxPageInstance}, Path=FavoriteCommand}" 
+                                               CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10">
+                                <!-- Tap Gesture -->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference InboxPageInstance}, Path=EmailTappedCommand}"
+                                                          CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                               
+                                <!-- User Icon -->
+                                <Frame Grid.Column="0" WidthRequest="40" HeightRequest="40" 
+                                       CornerRadius="20" BackgroundColor="LightGray" 
+                                       VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Label Text="{Binding SenderInitial}" FontSize="18" FontAttributes="Bold"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+
+
+                                <!-- Email Details -->
+                                <StackLayout Grid.Column="1" Spacing="2">
+                                    <Label Text="{Binding Subject}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Preview}" FontSize="Small" />
+                                </StackLayout>
+
+                                <!-- Favorite Indicator -->
+                                <Label Grid.Column="2" Text="★" IsVisible="{Binding IsFavorite}" TextColor="Gold" />
+
+                               
+
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <!-- Compose Button at the Bottom -->
+        <Button Text="Compose" Command="{Binding ComposeCommand}"
+                HorizontalOptions="End" Margin="10"
+                VerticalOptions="End" />
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>
